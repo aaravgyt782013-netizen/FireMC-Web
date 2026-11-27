@@ -1,11 +1,13 @@
 # Render Blueprint — https://render.com/docs/blueprint-spec
-# This repo is a fully static site: no build step, no server process needed.
+# Deployed as a Web Service: Node + `serve` hosts the static files.
 services:
   - type: web
-    runtime: static
     name: firemc-web
-    staticPublishPath: .            # index.html lives at the repo root
-    buildCommand: echo "Static site — no build required"
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
     pullRequestPreviewsEnabled: true
     headers:
       - path: /assets/*

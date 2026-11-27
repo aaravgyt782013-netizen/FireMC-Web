@@ -12,34 +12,27 @@ A static clone of the **FireMC official store** (https://store.firemc.fun/), reb
 
 ## Run
 
-It's fully static — serve the folder with any web server:
-
 ```bash
-python3 -m http.server 8000
-# or: npx serve .
+npm install
+npm start          # serves on $PORT (default 3000) via `serve`
+# or, with no Node: python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000.
-
-## Deploy to Render
-
-**Recommended: Static Site** (fastest, free tier friendly, no process to keep alive):
+## Deploy to Render — Web Service
 
 | Setting | Value |
 |---|---|
-| Type | Static Site |
-| Build command | `echo "Static site — no build required"` (or leave blank) |
-| Publish directory | `.` (repo root — `index.html` sits at root) |
-| Start command | *not needed* — Render serves the files for you |
+| Type | **Web Service** |
+| Runtime | Node |
+| Build command | `npm install` |
+| Start command | `npm start` |
+| Health check path | `/` |
 
-A `render.yaml` Blueprint is included — in Render choose **New → Blueprint**, pick this repo, and it configures everything automatically.
+A `render.yaml` Blueprint is included — in Render choose **New → Blueprint**, pick this repo, and it configures everything automatically (Node runtime, `npm install` build, `npm start` launch, caching headers).
 
-If you'd rather use a **Web Service** (a live server process) instead:
+`npm start` runs `serve -l $PORT .`, which binds to the port Render injects. Routing is hash-based (`#/category/lifesteal`), so no rewrite rules are required.
 
-- Node: start command `npx serve -l $PORT .`
-- Python: start command `python3 -m http.server $PORT --bind 0.0.0.0`
-
-(No build command needed either way; routing is hash-based `#/...`, so no rewrite rules are required.)
+If you'd rather use Python on a Web Service instead of Node: build command blank, start command `python3 -m http.server $PORT --bind 0.0.0.0`.
 
 ## Notes
 

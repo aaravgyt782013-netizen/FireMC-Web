@@ -1,0 +1,12 @@
+{
+  "name": "firemc-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FireMC store clone — static site served as a Render Web Service",
+  "scripts": {
+    "start": "serve -l $PORT ."
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
