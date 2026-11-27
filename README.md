@@ -21,6 +21,26 @@ python3 -m http.server 8000
 
 Then open http://localhost:8000.
 
+## Deploy to Render
+
+**Recommended: Static Site** (fastest, free tier friendly, no process to keep alive):
+
+| Setting | Value |
+|---|---|
+| Type | Static Site |
+| Build command | `echo "Static site — no build required"` (or leave blank) |
+| Publish directory | `.` (repo root — `index.html` sits at root) |
+| Start command | *not needed* — Render serves the files for you |
+
+A `render.yaml` Blueprint is included — in Render choose **New → Blueprint**, pick this repo, and it configures everything automatically.
+
+If you'd rather use a **Web Service** (a live server process) instead:
+
+- Node: start command `npx serve -l $PORT .`
+- Python: start command `python3 -m http.server $PORT --bind 0.0.0.0`
+
+(No build command needed either way; routing is hash-based `#/...`, so no rewrite rules are required.)
+
 ## Notes
 
 - Package images are hot-linked from the store's Tebex CDN (`dunb17ur4ymx4.cloudfront.net`).
