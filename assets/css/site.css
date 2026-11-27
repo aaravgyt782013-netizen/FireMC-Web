@@ -1,5 +1,5 @@
 /* ============================================================
-   FireMC Store — stylesheet
+   FireMC Store — stylesheet (rebuilt from the REA capture corpus)
    ============================================================ */
 :root {
   --bg: #0b0d12;
@@ -292,6 +292,7 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 16px; padding: 26px;
   box-shadow: var(--shadow);
   transform: translateY(10px) scale(0.98); transition: transform 0.18s ease;
+  position: relative;
 }
 .modal.open .modal-panel { transform: none; }
 .modal-panel h3 { font-size: 18px; margin-bottom: 8px; }
@@ -325,7 +326,6 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute; top: 14px; right: 14px;
   background: none; border: none; color: var(--muted); font-size: 18px;
 }
-.modal-panel { position: relative; }
 .modal-close:hover { color: var(--text); }
 
 /* ---------- basket drawer ---------- */

@@ -1,21 +1,45 @@
 # FireMC-Web
 
-A static clone of the **FireMC official store** (https://store.firemc.fun/), rebuilt from scratch with plain **HTML / CSS / JavaScript** — no frameworks, no build step.
+A reverse-engineered rebuild of the **FireMC official store** (https://store.firemc.fun/),
+produced with the **REA** toolchain (`rea-agents` — https://github.com/morluto/rea),
+using plain HTML / CSS / JavaScript — no frameworks, no build step.
 
-## Features
+## REA workflow (how this repo was built)
 
-- **Home page** — hero banner, Featured Packages grid, Support & Refund-policy cards, terms links (matching the live store's content).
-- **Sidebar categories** — 🔥 Fire, Coins [LifeSteal], Lifesteal Ranks, Coins [Classic], Classic Ranks — with the full package catalog (names, prices, images, Tebex package IDs).
-- **Username gate** — the same "Please enter your username to continue" modal, with **Bedrock support** (auto `.` prefix) and live Minecraft avatar preview via minotar.net.
-- **Basket** — add/remove, quantity steppers, totals, persisted in `localStorage`, slide-out drawer.
-- **Giftcard balance widget**, copy-IP pill, toasts, hash-based routing (`#/category/lifesteal`, …), fully responsive.
+```
+capture → reconstruct → REA verify → ship
+```
+
+1. **Capture** — the 6 live store pages were captured and stored verbatim in
+   `rea/capture/` (home, 4 categories, terms). The sandbox shell cannot reach
+   `store.firemc.fun` directly (blocked egress), so capture ran platform-side.
+2. **Reconstruct** — the captured content/behavior became the runnable site in
+   `index.html` + `assets/`: catalog (27 packages, real Tebex ids/prices/images),
+   username gate with Bedrock handling, basket, giftcard widget, checkout
+   hand-off to the live Tebex store.
+3. **REA verify** — `rea analyze-javascript-application assets/js --json`
+   produced a sealed Evidence bundle over the shipped code (modules, `fm.*`
+   localStorage keys with source locations, integrity contradictions: none).
+   Distilled artifacts live in `rea/evidence/`; see `rea/evidence/README.md`.
+
+Tool status on this machine: `rea@6.7.0` installed globally (`npm install -g
+rea-agents`), Java 21 (Temurin via jdk4py) present for native tooling; Ghidra's
+distribution cannot be downloaded from this sandbox (blocked hosts) and is not
+needed for web targets.
+
+## Site features
+
+- Home page — hero, Featured Packages, Support & Refund-policy cards, terms links
+- Sidebar categories — 🔥 Fire, Coins [LifeSteal], Lifesteal Ranks, Coins [Classic], Classic Ranks
+- Username gate — same modal as the live store, Bedrock `.`-prefix support, live avatar preview
+- Basket — quantities, totals, persisted in `localStorage`, slide-out drawer
+- Giftcard widget, copy-IP pill, hash routing (`#/category/lifesteal`, …), responsive dark theme
 
 ## Run
 
 ```bash
 npm install
-npm start          # serves on $PORT (default 3000) via `serve`
-# or, with no Node: python3 -m http.server 8000
+npm start          # serve -l $PORT . (default 3000)
 ```
 
 ## Deploy to Render — Web Service
@@ -28,22 +52,25 @@ npm start          # serves on $PORT (default 3000) via `serve`
 | Start command | `npm start` |
 | Health check path | `/` |
 
-A `render.yaml` Blueprint is included — in Render choose **New → Blueprint**, pick this repo, and it configures everything automatically (Node runtime, `npm install` build, `npm start` launch, caching headers).
+A `render.yaml` Blueprint is included (New → Blueprint → pick this repo).
 
-`npm start` runs `serve -l $PORT .`, which binds to the port Render injects. Routing is hash-based (`#/category/lifesteal`), so no rewrite rules are required.
+## Repo layout
 
-If you'd rather use Python on a Web Service instead of Node: build command blank, start command `python3 -m http.server $PORT --bind 0.0.0.0`.
+```
+index.html                 # the rebuilt storefront
+assets/css/site.css        # dark fire theme
+assets/js/catalog.js       # catalog reconstructed from rea/capture/
+assets/js/app.js           # routing, basket, modals, UI
+assets/img/                # generated logo emblem + hero banner
+rea/capture/               # verbatim captured live-store pages (input corpus)
+rea/evidence/              # distilled REA Evidence bundles + notes
+render.yaml, package.json  # Render Web Service deploy config
+```
 
 ## Notes
 
-- Package images are hot-linked from the store's Tebex CDN (`dunb17ur4ymx4.cloudfront.net`).
-- "Add to cart" builds a local basket; the **Checkout** button hands off to the real store (checkout/payments stay with Tebex on store.firemc.fun).
-- Catalog data lives in `assets/js/catalog.js` — edit there to update packages/prices.
-
-```
-index.html              # shell + modal/drawer/footer markup
-assets/css/style.css    # dark fire theme
-assets/js/catalog.js    # mirrored store data
-assets/js/app.js        # routing, basket, modals, UI
-assets/img/             # generated logo emblem + hero banner
-```
+- Package images are hot-linked from the store's Tebex CDN
+  (`dunb17ur4ymx4.cloudfront.net`); avatars come from `minotar.net`.
+- "Add to cart" builds a local basket; **Checkout** hands off to the real
+  store — payments stay with Tebex on store.firemc.fun (never replicated).
+- Update the catalog in `assets/js/catalog.js` to change packages/prices.

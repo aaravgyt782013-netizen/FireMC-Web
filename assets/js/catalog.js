@@ -1,5 +1,7 @@
 /* ============================================================
-   FireMC Store — catalog data mirrored from store.firemc.fun
+   FireMC Store — catalog reconstructed from the REA capture
+   corpus in rea/capture/ (store.firemc.fun, captured 2026-11-27).
+   Package ids, names, prices and CDN images match the live store.
    ============================================================ */
 window.CATALOG = {
   store: {
@@ -87,17 +89,17 @@ window.CATALOG = {
         "All ranks purchased here will apply only in our \u201cCLASSIC\u201d gamemode."
       ],
       packages: [
-        { id: 6018453, name: "Supreme Rank (+3200 Coins)",   price: 22.00, image: "5feb03d14c22cbc01dfa28208221b49cdfbfd08a.png", action: "add" },
-        { id: 6018464, name: "Legend Rank (+2000 Coins)",    price: 11.00, image: "f10dfd267c611f740fcd4295824e9e847eea9756.png", action: "add" },
-        { id: 6018991, name: "MasterMind Rank (+1000 Coins)", price: 6.70, image: "d5eb3cf6707153b9beba6466622340b615270e41.jpg", action: "add" },
-        { id: 6018997, name: "Alpha Rank (+850 Coins)",      price: 4.40,  image: "f301e2b668ff4eba4d529d3f2c34edb38829ee38.png", action: "add" },
-        { id: 6019002, name: "Captain Rank [Monthly]",       price: 2.20,  image: "595f5dbab7fb0c00ec0ceb76bba8a6bac39b4ac6.jpg", action: "subscribe" },
-        { id: 6019891, name: "Star Rank [Monthly]",          price: 1.00,  image: "353573c39f912664f3e7ff6c932adbdf7a3feef7.jpg", action: "subscribe" }
+        { id: 6018453, name: "Supreme Rank (+3200 Coins)",    price: 22.00, image: "5feb03d14c22cbc01dfa28208221b49cdfbfd08a.png", action: "add" },
+        { id: 6018464, name: "Legend Rank (+2000 Coins)",     price: 11.00, image: "f10dfd267c611f740fcd4295824e9e847eea9756.png", action: "add" },
+        { id: 6018991, name: "MasterMind Rank (+1000 Coins)", price: 6.70,  image: "d5eb3cf6707153b9beba6466622340b615270e41.jpg", action: "add" },
+        { id: 6018997, name: "Alpha Rank (+850 Coins)",       price: 4.40,  image: "f301e2b668ff4eba4d529d3f2c34edb38829ee38.png", action: "add" },
+        { id: 6019002, name: "Captain Rank [Monthly]",        price: 2.20,  image: "595f5dbab7fb0c00ec0ceb76bba8a6bac39b4ac6.jpg", action: "subscribe" },
+        { id: 6019891, name: "Star Rank [Monthly]",           price: 1.00,  image: "353573c39f912664f3e7ff6c932adbdf7a3feef7.jpg", action: "subscribe" }
       ]
     }
   ],
 
-  /* Featured packages shown on the home page, in the live store's order */
+  /* Featured packages on the home page, in the live store's order */
   featured: [
     { cat: "lifesteal",     id: 6915818 },
     { cat: "coins",         id: 5823743 },

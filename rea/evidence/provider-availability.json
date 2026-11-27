@@ -1,0 +1,120 @@
+{
+  "note": "REA provider availability at analysis time (rea capabilities --json, distilled).",
+  "server": {
+    "name": "rea-agents",
+    "version": "6.7.0",
+    "root_path": "/usr/local/lib/node_modules/rea-agents",
+    "build_commit": null
+  },
+  "providers": [
+    {
+      "id": "native-macos",
+      "name": "macOS native inspection utilities",
+      "groups": [
+        {
+          "operations": [
+            "capture_native_ui_scenario",
+            "observe_native_calls"
+          ],
+          "available": false,
+          "availability_code": "unsupported_host"
+        },
+        {
+          "operations": [
+            "demangle_swift",
+            "inspect_macho",
+            "inspect_plist",
+            "inspect_signature",
+            "list_architectures"
+          ],
+          "available": false,
+          "availability_code": "unsupported_host"
+        },
+        {
+          "operations": [
+            "inspect_native_dispatch_metadata"
+          ],
+          "available": false,
+          "availability_code": "unsupported_host"
+        },
+        {
+          "operations": [
+            "observe_native_ui"
+          ],
+          "available": false,
+          "availability_code": "unsupported_host"
+        }
+      ]
+    },
+    {
+      "id": "rea-artifact-graph",
+      "name": "REA safe artifact graph provider",
+      "groups": [
+        {
+          "operations": [
+            "decode_interface_builder",
+            "inspect_keyed_archive",
+            "trace_dylib_resolution"
+          ],
+          "available": true,
+          "availability_code": null
+        },
+        {
+          "operations": [
+            "extract_artifact",
+            "inspect_artifact"
+          ],
+          "available": true,
+          "availability_code": null
+        },
+        {
+          "operations": [
+            "inspect_asset_catalog"
+          ],
+          "available": false,
+          "availability_code": "unsupported_host"
+        }
+      ]
+    },
+    {
+      "id": "rea-dotnet-static",
+      "name": "REA managed static analysis provider",
+      "groups": [
+        {
+          "operations": [
+            "inspect_managed_artifact"
+          ],
+          "available": true,
+          "availability_code": null
+        },
+        {
+          "operations": [
+            "inspect_managed_members"
+          ],
+          "available": true,
+          "availability_code": null
+        },
+        {
+          "operations": [
+            "inspect_managed_native_boundaries"
+          ],
+          "available": true,
+          "availability_code": null
+        }
+      ]
+    },
+    {
+      "id": "sqlite",
+      "name": "REA SQLite database inspector",
+      "groups": [
+        {
+          "operations": [
+            "inspect_sqlite_database"
+          ],
+          "available": false,
+          "availability_code": "unsupported_version"
+        }
+      ]
+    }
+  ]
+}
