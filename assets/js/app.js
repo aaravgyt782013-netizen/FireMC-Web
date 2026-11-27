@@ -1,5 +1,7 @@
 /* ============================================================
-   FireMC Store — front-end app (vanilla JS, hash routing)
+   FireMC Store — front-end app (vanilla JS, hash routing).
+   Reverse-engineered from the behavior documented in rea/capture/:
+   username gate -> basket -> Tebex checkout hand-off.
    ============================================================ */
 (function () {
   "use strict";
@@ -355,6 +357,13 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { closeModal(); closeDrawer(); }
     if (e.key === "Enter" && $("#username-modal").classList.contains("open")) continueModal();
+    if (e.key === "Enter" && e.target && e.target.id === "gift-code") {
+      e.preventDefault();
+      var code = e.target.value.trim();
+      if (!code) { toast("Enter a giftcard code first"); return; }
+      $("#gift-body").dataset.code = code;
+      state.giftState = "result"; giftBody();
+    }
   });
 
   document.addEventListener("input", function (e) {
@@ -364,17 +373,6 @@
       img.onerror = function () { this.onerror = null; this.src = avatarUrl(""); };
       img.src = avatarUrl(v || "MHF_Question");
       $("#modal-error").textContent = "";
-    }
-    if (e.target.id === "gift-code" && e.key === "Enter") { /* handled by keydown above */ }
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && e.target && e.target.id === "gift-code") {
-      e.preventDefault();
-      var code = e.target.value.trim();
-      if (!code) { toast("Enter a giftcard code first"); return; }
-      $("#gift-body").dataset.code = code;
-      state.giftState = "result"; giftBody();
     }
   });
 

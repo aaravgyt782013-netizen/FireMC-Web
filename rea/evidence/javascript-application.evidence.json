@@ -1,0 +1,159 @@
+{
+  "note": "Distilled REA Evidence. Full Evidence is 2.6 MB and not committed; regenerate with: rea analyze-javascript-application assets/js --json",
+  "evidence_id": "ev_fed76e33c2bcb7503a47cdc1fe42e22c7277dc91194d9fc9b9a714e910fd679d",
+  "subject": {
+    "name": "js",
+    "format": "directory",
+    "sha256": "14a02b0bda66d199a39521644e8ab310ffd1f0c19c0aa149a48a0bbc80e72dd4",
+    "local_path": "/home/user/FireMC-Web/assets/js"
+  },
+  "provider": {
+    "id": "rea-javascript-application",
+    "name": "REA JavaScript application analyzer",
+    "version": "1"
+  },
+  "operation": "analyze_javascript_application",
+  "predicate_type": "rea.javascript-application-analysis",
+  "result": {
+    "input_path": "/home/user/FireMC-Web/assets/js",
+    "root_artifact_sha256": "14a02b0bda66d199a39521644e8ab310ffd1f0c19c0aa149a48a0bbc80e72dd4",
+    "integrity_contradictions": [],
+    "graph_schema": "JavaScriptApplicationGraph",
+    "node_count": 8,
+    "nodes": [
+      {
+        "kind": "javascript-asset",
+        "key": null,
+        "name": "catalog.js",
+        "sha256": null,
+        "location": {
+          "source": null,
+          "start": null,
+          "end": null
+        },
+        "storage_mechanism": null
+      },
+      {
+        "kind": "javascript-module",
+        "key": "14a02b0bda66d199a39521644e8ab310ffd1f0c19c0aa149a48a0bbc80e72dd4:app.js",
+        "name": "app.js",
+        "sha256": "d44367bf20ee33723ec24b3014819d74b7aca939331563d14c76bb186d8a06c2",
+        "location": {
+          "source": "app.js",
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 396,
+            "column": 0
+          }
+        },
+        "storage_mechanism": null
+      },
+      {
+        "kind": "javascript-module",
+        "key": "14a02b0bda66d199a39521644e8ab310ffd1f0c19c0aa149a48a0bbc80e72dd4:catalog.js",
+        "name": "catalog.js",
+        "sha256": "86a4415d8c4ae6661ae86cf9542d7959b682e7465652e1476b98727ef8496699",
+        "location": {
+          "source": "catalog.js",
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 141,
+            "column": 0
+          }
+        },
+        "storage_mechanism": null
+      },
+      {
+        "kind": "storage",
+        "key": "fm.basket",
+        "name": "fm.basket",
+        "sha256": null,
+        "location": {
+          "source": "app.js",
+          "start": {
+            "line": 23,
+            "column": 4
+          },
+          "end": {
+            "line": 23,
+            "column": 67
+          }
+        },
+        "storage_mechanism": "call:localStorage.setItem"
+      },
+      {
+        "kind": "storage",
+        "key": "fm.bedrock",
+        "name": "fm.bedrock",
+        "sha256": null,
+        "location": {
+          "source": "app.js",
+          "start": {
+            "line": 14,
+            "column": 13
+          },
+          "end": {
+            "line": 14,
+            "column": 47
+          }
+        },
+        "storage_mechanism": "call:localStorage.getItem"
+      },
+      {
+        "kind": "artifact",
+        "key": null,
+        "name": null,
+        "sha256": null,
+        "location": {
+          "source": null,
+          "start": null,
+          "end": null
+        },
+        "storage_mechanism": null
+      },
+      {
+        "kind": "javascript-asset",
+        "key": null,
+        "name": "app.js",
+        "sha256": null,
+        "location": {
+          "source": null,
+          "start": null,
+          "end": null
+        },
+        "storage_mechanism": null
+      },
+      {
+        "kind": "storage",
+        "key": "fm.username",
+        "name": "fm.username",
+        "sha256": null,
+        "location": {
+          "source": "app.js",
+          "start": {
+            "line": 21,
+            "column": 4
+          },
+          "end": {
+            "line": 21,
+            "column": 55
+          }
+        },
+        "storage_mechanism": "call:localStorage.setItem"
+      }
+    ],
+    "limitations": [
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+    ]
+  }
+}
